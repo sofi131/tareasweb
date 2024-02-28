@@ -1,4 +1,4 @@
-package com.ceica.taskappfx.models;
+package com.ceica.tareasweb.models;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

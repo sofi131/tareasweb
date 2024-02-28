@@ -1,7 +1,7 @@
-package com.ceica.taskappfx.controller;
-import com.ceica.taskappfx.models.Rol;
-import com.ceica.taskappfx.models.Task;
-import com.ceica.taskappfx.models.User;
+package com.ceica.tareasweb.controller;
+import com.ceica.tareasweb.models.Rol;
+import com.ceica.tareasweb.models.Task;
+import com.ceica.tareasweb.models.User;
 
 import java.time.LocalDate;
 import java.util.List;

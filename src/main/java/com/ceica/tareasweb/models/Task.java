@@ -1,6 +1,5 @@
-package com.ceica.taskappfx.models;
+package com.ceica.tareasweb.models;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
