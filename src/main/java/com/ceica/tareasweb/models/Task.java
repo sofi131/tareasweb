@@ -1,38 +1,22 @@
 package com.ceica.tareasweb.models;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Task extends ModeloBase {
+
     private int idtask;
     private String title;
     private String description;
+    private User user;
+    private boolean status;
     private Date create_time;
     private Date deadline;
-    private boolean status;
-    //creo su propia clase
-    private User user;
 
-    //constructor vacío
     public Task() {
     }
 
-    //constructor lleno
-
-    public Task(int idtask, String title, String description, Date create_time, Date deadline, boolean status) {
-        this.idtask = idtask;
-        this.title = title;
-        this.description = description;
-        this.create_time = create_time;
-        this.deadline = deadline;
-        this.status = status;
-    }
-//este lo crea para ver tasks
-//    public Task(int idtask, String title, String description, LocalDate createDate, LocalDate deadline, boolean status) {
-//        super();
-//    }
-
-    //-----------------------------------------getter & setter-------------------------------
     public int getIdtask() {
         return idtask;
     }
@@ -57,6 +41,22 @@ public class Task extends ModeloBase {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public Date getCreate_time() {
         return create_time;
     }
@@ -73,41 +73,25 @@ public class Task extends ModeloBase {
         this.deadline = deadline;
     }
 
-    public boolean isStatus() {
-        return status;
+    @Override
+    protected String getNombreTabla() {
+        return "task";
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    //-------------------------------------toString-------------------------------
     @Override
     public String toString() {
         return "Task{" +
                 "idtask=" + idtask +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", user=" + user +
+                ", status=" + status +
                 ", create_time=" + create_time +
                 ", deadline=" + deadline +
-                ", status=" + status +
                 '}';
     }
 
-    @Override
-    protected String getNombreTabla() {
-        return "task";
-    }
-
-    //ponemos task1 porque sino se repite
     public List<Task> getAllByUser(int iduser) {
         List<Task> taskList = new ArrayList<>();
         Task task1 = new Task();
@@ -121,14 +105,13 @@ public class Task extends ModeloBase {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setInt(1, iduser);
             ResultSet resultSet = pst.executeQuery();
-            taskList = readResultSet(resultSet);
+            taskList=readResulSet(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return taskList;
     }
 
-    //ver todas las tareas (admin) -- al ser Statement no lleva interrogante
     public List<Task> getAll() {
         List<Task> taskList = new ArrayList<>();
         Task task1 = new Task();
@@ -141,15 +124,14 @@ public class Task extends ModeloBase {
         try {
             Statement st = conn.createStatement();
             ResultSet resultSet = st.executeQuery(sql);
-            taskList = readResultSet(resultSet);
+           taskList=readResulSet(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return taskList;
     }
 
-    //nueva table que resuelve las otras dos
-    private List<Task> readResultSet(ResultSet resultSet) throws SQLException {
+    private List<Task> readResulSet(ResultSet resultSet) throws SQLException {
         List<Task> taskList = new ArrayList<>();
         while (resultSet.next()) {
             Task task = new Task();
@@ -166,27 +148,9 @@ public class Task extends ModeloBase {
             rol.setIdrol(resultSet.getInt("idrol"));
             rol.setDescription(resultSet.getString("rol"));
             user.setRol(rol);
-            task.setUser(user);
+            task.user = user;
             taskList.add(task);
         }
         return taskList;
     }
-
-    //getAllTask -------------------------------------------------> para ver las tasks
-//    public List<Task> getAllTasks() {
-//        List<Task> tasks = new ArrayList<>();
-//        List<Task> taskList = new ArrayList<>();
-//        Task task1 = new Task();
-//        Connection conn = task1.getConnection();
-//        String sql = "SELECT * FROM tasks";
-//        try {
-//            Statement st = conn.createStatement();
-//            ResultSet resultSet = st.executeQuery(sql);
-//            taskList = readResultSet(resultSet);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return taskList;
-//    }
 }
-

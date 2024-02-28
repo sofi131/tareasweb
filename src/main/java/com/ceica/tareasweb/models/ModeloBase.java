@@ -27,9 +27,9 @@ public abstract class ModeloBase {
             USUARIO = propiedades.getProperty("db.usuario");
             PASSWORD = propiedades.getProperty("db.password");
         } catch (IOException e) {
-            URL = "jdbc:mysql://localhost:3306/task";
-            USUARIO = "task";
-            PASSWORD = "1234";
+            URL="jdbc:mysql://localhost:3306/task";
+            USUARIO="task";
+            PASSWORD="1234";
         }
     }
 
@@ -39,8 +39,10 @@ public abstract class ModeloBase {
     // Métodos para CRUD
 
     public boolean insertar(String sql, Object... parametros) {
+
         sql = "insert into " + getNombreTabla() + " " + sql;
         return ejecutarQuery(sql, parametros);
+
     }
 
     public boolean actualizar(String sql, Object... parametros) {
@@ -52,7 +54,7 @@ public abstract class ModeloBase {
         sql = "delete from " + getNombreTabla() + " where " + sql;
         return ejecutarQuery(sql, parametros);
     }
-//Método que devuelve la conexión a la bd
+    //Método que devuelve la conexion a la bbdd
     public Connection getConnection(){
         try {
             Connection conexion=DriverManager.getConnection(URL,USUARIO,PASSWORD);
@@ -83,4 +85,6 @@ public abstract class ModeloBase {
             return false;
         }
     }
+
 }
+

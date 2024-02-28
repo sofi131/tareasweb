@@ -14,7 +14,6 @@ public class Rol extends ModeloBase {
     public Rol() {
     }
 
-    //---------------------------------------getter y setter--------------------------
     public int getIdrol() {
         return idrol;
     }
@@ -35,7 +34,9 @@ public class Rol extends ModeloBase {
     protected String getNombreTabla() {
         return "rol";
     }
-    //-----------------------------------toString--------------------------------
+
+
+
     @Override
     public String toString() {
         return "Rol{" +
@@ -43,20 +44,17 @@ public class Rol extends ModeloBase {
                 ", description='" + description + '\'' +
                 '}';
     }
-//de task para llenar rol
+
     public List<Rol> getAll() {
-        //lista de roles vacía
-        List<Rol> rolList = new ArrayList<>();
-        //obj user obtener la conn
-        Rol rol = new Rol();
-        //consulta contra la bd
-        Connection conn = rol.getConnection();
-        String consulta = "select idrol,description from rol";
+        List<Rol> rolList=new ArrayList<>();
+        Rol rol=new Rol();
+        Connection conn=rol.getConnection();
+        String consulta="select idrol,description from rol";
         try {
-            Statement stm = conn.createStatement();
-            ResultSet resultSet = stm.executeQuery(consulta);
-            while (resultSet.next()) {
-                Rol rol1 = new Rol();
+            Statement stm=conn.createStatement();
+            ResultSet resultSet=stm.executeQuery(consulta);
+            while (resultSet.next()){
+                Rol rol1=new Rol();
                 rol1.setIdrol(resultSet.getInt("idrol"));
                 rol1.setDescription(resultSet.getString("description"));
                 rolList.add(rol1);
