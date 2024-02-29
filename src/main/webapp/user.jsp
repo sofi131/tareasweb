@@ -9,27 +9,43 @@
 
 </head>
 <body>
-
-<div>
+<div class="container">
     <header>
         <p>${name}</p>
-        <a href="salir"></a>
+        <a href="?logout=salir">salir</a>
     </header>
     <hr>
     <div class="datos">
         <table>
+            <thead>
             <tr>
-                <th>Company</th>
-                <th>Contact</th>
-                <th>Country</th>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
             </tr>
-
-            <tr>
-                <td>Alfreds Futterkiste</td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-            </tr>
+            </thead>
+            <tbody>
+            <!-- Etiquetas JTSL-->
+            <!-- Esto es para elegir opciones -> si está vacío que ponga que no está disponible, sino poner task   -->
+            <c:choose>
+                <c:when test="${empty tasks}">
+                    <tr>
+                        <td colspan="3">No hay tareas disponibles.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${tasks}" var="task">
+                        <tr>
+                            <td><c:out value="${task.idtask}"/></td>
+                            <td><c:out value="${task.title}"/></td>
+                            <td><c:out value="${task.description}"/></td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+            </tbody>
         </table>
+
     </div>
 </div>
 

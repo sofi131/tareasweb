@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
             if (user == null) {
                 response.sendRedirect("login");
             } else {
-
+//saber que usuario está logueado, las tareas del user y pasa al user.jsp
                 if (user.getRol().getDescription().equals("user")) {
                     TaskController taskController=new TaskController();
                     taskController.userLogged=user;
