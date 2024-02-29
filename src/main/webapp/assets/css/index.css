@@ -1,0 +1,22 @@
+header{
+    display: flex;
+    justify-content: space-between;
+}
+header img{
+    width: 100px;
+    height: 100px;
+}
+.container{
+    margin: 0 auto;
+    width: 80%;
+}
+
+p{
+    background-color: yellow;
+}
+.uno{
+    color: green;
+}
+#uno{
+    background-color: blue;
+}
