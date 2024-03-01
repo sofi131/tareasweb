@@ -12,7 +12,9 @@ import java.io.PrintWriter;
 @WebServlet(name = "apiServlet", value = "/api")
 public class ApiServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String idtask=request.getParameter("idtask");
         PrintWriter out=response.getWriter();
-        out.write("Hola desde la api");
+        String respuesta="{\"msg\":\"tarea a borrrar " + idtask+" por la api\"}";
+        out.write(respuesta);
     }
 }

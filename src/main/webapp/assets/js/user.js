@@ -4,7 +4,7 @@ window.onload=()=>{
 }
 
 function borrar(idtask){
-    var baseUrl = window.location.protocol + "//" + window.location.host + "/tareasweb/api";
+    var baseUrl = window.location.protocol + "//" + window.location.host + "/tareasweb/api?idtask="+idtask;
 
     fetch(baseUrl, {
         method: 'GET', // Puedes cambiar este método según tu necesidad (POST, PUT, DELETE, etc.)
