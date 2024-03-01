@@ -15,6 +15,7 @@ function borrar(idtask){
     })
         .then(response => response.json()) // Procesamos la respuesta como JSON
         .then(data => {
+            location.reload();
             console.log(data); // Aquí puedes hacer lo que quieras con los datos
         })
         .catch(error => {
