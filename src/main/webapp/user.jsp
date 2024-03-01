@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <html>
 <head>
     <title>User</title>
@@ -16,17 +18,19 @@
     </header>
     <hr>
     <div class="datos">
-        <table>
+        <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descripción</th>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Create Date</th>
+                <th scope="col">Date</th>
+                <th scope="col">OP</th>
             </tr>
             </thead>
+
             <tbody>
-            <!-- Etiquetas JTSL-->
-            <!-- Esto es para elegir opciones -> si está vacío que ponga que no está disponible, sino poner task   -->
             <c:choose>
                 <c:when test="${empty tasks}">
                     <tr>
@@ -39,13 +43,25 @@
                             <td><c:out value="${task.idtask}"/></td>
                             <td><c:out value="${task.title}"/></td>
                             <td><c:out value="${task.description}"/></td>
+                            <fmt:formatDate value="${task.create_time}" pattern="dd-MM-yyyy" var="formattedCreate_time" />
+                            <td><c:out value="${formattedCreate_time}" /></td>
+                            <fmt:formatDate value="${task.deadline}" pattern="dd-MM-yyyy" var="formattedDeadline" />
+                            <td><c:out value="${formattedDeadline}" /></td>
+                            <td></td>
                         </tr>
                     </c:forEach>
                 </c:otherwise>
             </c:choose>
             </tbody>
         </table>
-
+        <hr>
+        <h3>New Task</h3>
+        <form action="" method="post">
+            <input type="text" placeholder="Title" name="title">
+            <input type="text" placeholder="Description" name="description">
+            <input type="date" name="deadline" placeholder="Deadline">
+            <input type="submit" name="New">
+        </form>
     </div>
 </div>
 
