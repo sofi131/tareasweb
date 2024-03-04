@@ -31,7 +31,7 @@
             </tr>
             </thead>
 
-            <tbody>
+            <tbody id="tableTask">
             <c:choose>
                 <c:when test="${empty tasks}">
                     <tr>
